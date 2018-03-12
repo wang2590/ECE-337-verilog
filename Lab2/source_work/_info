@@ -1,0 +1,66 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ecegrid/a/mg109/ece337/Lab2
+T_opt
+!s110 1516763234
+VH2;fDRCb:f0iMQb1Fnzkj0
+04 12 4 work tb_sync_high fast 0
+=1-5cb9017b479f-5a67f861-d1097-3438
+o-quiet -auto_acc_if_foreign -work source_work/ -L /home/ecegrid/a/ece337/Course_Prod/Cell_Libs/AMI_05/vhdl_work -L /home/ecegrid/a/ece337/Class0.5u/GOLD_LIB -Lf /home/ecegrid/a/ece337/Course_Prod/IP_Libs/Lab_IP_Lib/Vsim +acc
+n@_opt
+OL;O;10.3b;59
+vsync_high
+Z1 DXx6 sv_std 3 std 0 22 <EOTafDcUY:cQeO^ICn]m3
+Z2 !s110 1516763230
+!i10b 1
+!s100 NoEinQcTmYMh@NUzRec_z3
+Iif1bnDo@;G[@cG^c1DmP^2
+Z3 V`JN@9S9cnhjKRR_L]QIcM3
+!s105 sync_high_sv_unit
+S1
+R0
+w1516762100
+8source/sync_high.sv
+Fsource/sync_high.sv
+L0 9
+Z4 OL;L;10.3b;59
+r1
+!s85 0
+31
+!s108 1516763229.945718
+!s107 source/sync_high.sv|
+!s90 -sv|-work|source_work|source/sync_high.sv|
+!i113 0
+Z5 o-sv -work source_work
+Z6 tCoverage 63 CoverExcludeDefault 1 CoverOpt 1 CoverShortCircuit 0
+vtb_sync_high
+R1
+R2
+!i10b 1
+!s100 Uo:1EZKcgmdCZH7BY7JGX1
+IBB<GGPhRb?66hT0eVE6nz3
+R3
+!s105 tb_sync_high_sv_unit
+S1
+R0
+w1516759044
+8source/tb_sync_high.sv
+Fsource/tb_sync_high.sv
+L0 13
+R4
+r1
+!s85 0
+31
+!s108 1516763230.127733
+!s107 source/tb_sync_high.sv|
+!s90 -sv|-work|source_work|source/tb_sync_high.sv|
+!i113 0
+R5
+R6
