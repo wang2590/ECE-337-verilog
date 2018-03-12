@@ -1,0 +1,38 @@
+// $Id: $
+// File name:   decode.sv
+// Created:     2/21/2018
+// Author:      Shutao Wang
+// Lab Section: 04
+// Version:     1.0  Initial Design Entry
+// Description: .
+module decode
+(
+	input wire clk,
+	input wire n_rst,
+	input wire d_plus,
+	input wire shift_enable,
+	input wire eop,
+	output wire d_orig	
+);
+        reg s1,s2,next_s1,next_s2;
+
+	always_ff @ (posedge clk, negedge n_rst)
+	begin 
+		if (n_rst == 0) 
+		begin
+			s1 <= 1'b1;
+			s2 <= 1'b1;	
+		end
+
+		else 
+		begin
+			s1 <= next_s1;
+			s2 <= next_s2;  
+		end		
+	end
+
+   assign next_s1 = (shift_enable == 1 && eop == 1) ? 1'b1 : d_plus;
+   assign next_s2 = (shift_enable == 1 && eop == 1) ? 1'b1 : ((shift_enable == 1) ? d_plus : s2);
+   assign d_orig = ~(next_s1 ^ next_s2);
+	
+endmodule
