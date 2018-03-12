@@ -1,0 +1,28 @@
+
+1.
+
+    Shutao Wang:
+
+        Category 1: 5
+        Category 2: 4
+        Category 3: 5
+        Category 4: 4
+
+
+    Ji A:
+
+        Category 1: 5
+        Category 2: 4
+        Category 3: 5
+        Category 4: 4
+
+2. Ji A and I, we worked very hard on trying to understand all the materials. This lab04 take us almost two days to finished just for the preparation before doing the actual labs. We also did discuss on the different cased for testbenches. 
+
+3. Ji A mainly contributed on the RTL diagrams and timer block diagrams; he also sorted the ideas on the source code for RCU and 9-bit shift registers. 
+
+4. We met for two days total, we only did face to face communications.
+
+5. Ji A helped me on getting the head straight on the RTL diagrams for the RCU block, and he also gave me huge help on the block diagrams for the timer unit as well. He also had some very helpful ideas on the RCU and 9-bit shift registers.  
+
+6. I think the testbench that was given by the instructors was really helpful; I created my own testbench as well for testing the source code.
+

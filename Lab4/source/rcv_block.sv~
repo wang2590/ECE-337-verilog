@@ -1,0 +1,41 @@
+// $Id: $
+// File name:   rcv_block.sv
+// Created:     2/7/2018
+// Author:      Shutao Wang
+// Lab Section: 04
+// Version:     1.0  Initial Design Entry
+// Description: .
+
+module rcv_block
+  (
+      input wire clk,
+      input wire n_rst,
+      input wire serial_in,
+      input wire data_read,
+      output reg [7:0] rx_data,
+      output reg data_ready,
+      output reg overrun_error,
+      output reg framing_error
+   );
+
+   wire shift_strobe_signal;
+   wire packet_done_signal;
+   wire enable_timer_signal;
+   wire start_bit_detect_signal;
+   wire sbc_clear_signal;
+   wire sbc_enable_signal;
+   wire stop_bit_signal;
+   wire load_buffer_signal;
+   wire [7:0] packet_data;
+
+   timer         timer     (.clk(clk), .n_rst(n_rst), .enable_timer(enable_timer_signal), .shift_strobe(shift_strobe_signal), .packet_done(packet_done_signal));
+   rcu           receiver  (.clk(clk), .n_rst(n_rst), .start_bit_detected(start_bit_detect_signal), .packet_done(packet_done_singal),.framing_error(framing_error), .sbc_clear(sbc_clear_signal), .sbc_enable(sbc_enable_signal), .load_buffer(load_buffer_signal), .enable_timer(enable_timer_signal));
+   sr_9bit       shift_reg (.clk(clk), .n_rst(n_rst), .shift_strobe(shift_strobe_signal), .serial_in(serial_in), .packet_data(packet_data), .stop_bit(stop_done_signal));
+   rx_data_buff  buffer    (.clk(clk), .n_rst(n_rst), .load_buffer(load_buffer_sig), .packet_data(packet_data), .data_read(data_read), .rx_data(rx_data), .data_ready(data_read), .overrun_error(overrun_error));
+   start_bit_det start     (.clk(clk), .n_rst(n_rst), .serial_in(serial_in), .start_bit_detected(start_bit_detect_signal));
+   stop_bit_chk  stop      (.clk(clk), .n_rst(n_rst), .sbc_clear(sbc_clear_signal), .sbc_enable(sbc_enable_signal), .stop_bit(stop_bit_signal), .framing_error(framing_error));
+   
+endmodule   
+   
+   
+   

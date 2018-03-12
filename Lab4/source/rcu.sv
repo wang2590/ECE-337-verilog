@@ -1,0 +1,111 @@
+// $Id: $
+// File name:   rcu.sv
+// Created:     2/7/2018
+// Author:      Shutao Wang
+// Lab Section: 04
+// Version:     1.0  Initial Design Entry
+// Description: .
+
+module rcu
+  (
+   input wire clk,
+   input wire n_rst,
+   input wire start_bit_detected,
+   input wire packet_done,
+   input wire framing_error,
+   output reg sbc_clear,
+   output reg sbc_enable,
+   output reg load_buffer,
+   output reg enable_timer
+   );
+
+   typedef enum bit [2:0] {START,CLEAR,HOLD,STOP_BIT_DETECT,START_BIT_DETECT,LOAD} stateType;
+   //START is your IDLE state
+   // CLEAR
+   //START_BIT_DETECT
+   //STOP_BIT_DETECT
+   //HOLD check framing error
+   //LOAD -> START
+   stateType curr_state;
+   stateType next_state;
+
+   always_ff @(negedge n_rst, posedge clk)
+     begin
+	if(n_rst == 1'b0)
+	  curr_state <= START;
+	else
+	  curr_state <= next_state;
+     end
+
+   always_comb begin
+      next_state = curr_state;
+      case(curr_state) 
+	 START: begin
+	    if(start_bit_detected == 1) 
+	       next_state = CLEAR;
+	    else 
+	       next_state = START;
+	    end
+	 CLEAR:begin
+	    next_state = START_BIT_DETECT;
+	 end
+	START_BIT_DETECT:begin
+	   if(packet_done == 1) 
+	      next_state = STOP_BIT_DETECT;
+	end
+	STOP_BIT_DETECT:begin
+	   next_state = HOLD;
+	end
+	HOLD:begin
+	   if(framing_error == 1)
+	     next_state = START;
+	   
+	   else 
+	      next_state = LOAD;
+	   
+	end
+	LOAD:begin
+	   next_state = START;
+	end
+	
+   endcase // case (curr_state)
+   end // always_comb
+   
+  always_comb 
+    begin //START,CLEAR,HOLD,STOP_BIT_DETECT,START_BIT_DETECT,LOAD
+       sbc_clear = 0;
+       sbc_enable = 0;     
+       load_buffer = 0;
+       enable_timer = 0;
+       
+       if (curr_state == START_BIT_DETECT)
+	 begin
+	    enable_timer = 1;
+	 end
+       else if (curr_state == CLEAR)
+	 begin
+	    sbc_clear = 1;
+	 end
+       else if (curr_state == STOP_BIT_DETECT)
+	 begin
+	    sbc_enable = 1;
+	 end
+         else if (curr_state == LOAD)
+	 begin
+	    load_buffer = 1;
+	 end
+    end // always_comb
+endmodule // rcu
+
+       
+       
+       
+       
+	   
+	    
+	      
+
+
+  
+		     
+	  
